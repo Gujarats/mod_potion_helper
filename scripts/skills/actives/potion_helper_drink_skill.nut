@@ -9,9 +9,11 @@ this.potion_helper_drink_skill <- this.inherit("scripts/skills/skill", {
         this.m.Name = "Drink Health Potion";
         this.m.Description = "Drink this potion to restore health.";
         this.m.Type = this.Const.SkillType.Active;
+        this.m.Order = this.Const.SkillOrder.Any - 10; // Puts it neatly with other active items
         this.m.IsActive = true;
+        this.m.IsStacking = true;
         this.m.IsTargeted = true;
-        this.m.ActionPointCost = 3;
+        this.m.ActionPointCost = ::PotionHelper.conf("PotionDrinkAPCost");
         this.m.FatigueCost = 5;
         this.m.MinRange = 0;
         this.m.MaxRange = 0;
@@ -20,8 +22,6 @@ this.potion_helper_drink_skill <- this.inherit("scripts/skills/skill", {
             "sounds/combat/drink_02.wav",
             "sounds/combat/drink_03.wav"
         ];
-
-
     }
 
     function setTier( _tier )
@@ -35,7 +35,25 @@ this.potion_helper_drink_skill <- this.inherit("scripts/skills/skill", {
     function onUse( _user, _targetTile )
     {
         ::PotionHelper.restoreHealth(_user, this.m.Tier);
-        this.m.Item.get().removeSelf();
+
+        if (this.m.Item != null && !this.m.Item.isNull())
+        {
+            local container = this.m.Item.getItemContainer();
+            if (container != null)
+            {
+                container.removeItem(this.m.Item);
+            }
+            else
+            {
+                this.m.Item.removeSelf();
+            }
+        }
+
+        if (this.getContainer() != null)
+        {
+            this.getContainer().remove(this);
+        }
+
         return true;
     }
 });

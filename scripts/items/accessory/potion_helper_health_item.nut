@@ -16,6 +16,26 @@ this.potion_helper_health_item <- this.inherit("scripts/items/accessory/accessor
         this.m.Value = 35;
     }
 
+    function isUsable()
+    {
+        if (!this.item.isUsable())
+        {
+            return false;
+        }
+
+        local container = this.getContainer();
+        if (container != null && container.getActor() != null && !container.getActor().isNull())
+        {
+            local actor = container.getActor();
+            if (actor.getHitpoints() >= actor.getHitpointsMax())
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     function onEquip()
     {
         this.accessory.onEquip();
@@ -23,6 +43,16 @@ this.potion_helper_health_item <- this.inherit("scripts/items/accessory/accessor
         skill.setItem(this);
         skill.setTier(this.m.Tier);
         this.addSkill(skill);
+    }
+
+    function onUnequip()
+    {
+        if (this.m.Skill != null && !this.m.Skill.isNull() && this.getContainer() != null && this.getContainer().getActor() != null)
+        {
+            this.getContainer().getActor().getSkills().remove(this.m.Skill);
+        }
+
+        this.accessory.onUnequip();
     }
 
     function onPutIntoBag()

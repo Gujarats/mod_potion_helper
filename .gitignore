@@ -1,1 +1,6 @@
 release/*.zip
+.bbbuilder
+.brush_build_manifest.json
+__pycache__
+dist
+*.zip

@@ -6,6 +6,7 @@ this.potion_helper_low_item <- this.inherit("scripts/items/accessory/potion_help
         this.m.Name = "Low Health Potion";
         this.m.Description = "A small emergency draught.";
         this.m.Tier = "low";
+        this.m.Icon = "consumables/potion_helper_health_low.png";
         this.m.Value = ::PotionHelper.getPrice("LowHealthPrice");
     }
 });

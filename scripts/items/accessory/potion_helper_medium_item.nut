@@ -6,6 +6,7 @@ this.potion_helper_medium_item <- this.inherit("scripts/items/accessory/potion_h
         this.m.Name = "Medium Health Potion";
         this.m.Description = "A potent emergency draught.";
         this.m.Tier = "medium";
+        this.m.Icon = "consumables/potion_helper_health_medium.png";
         this.m.Value = ::PotionHelper.getPrice("MediumHealthPrice");
     }
 });

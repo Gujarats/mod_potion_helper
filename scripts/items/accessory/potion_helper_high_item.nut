@@ -6,6 +6,7 @@ this.potion_helper_high_item <- this.inherit("scripts/items/accessory/potion_hel
         this.m.Name = "High Health Potion";
         this.m.Description = "A powerful emergency draught.";
         this.m.Tier = "high";
+        this.m.Icon = "consumables/potion_helper_health_high.png";
         this.m.Value = ::PotionHelper.getPrice("HighHealthPrice");
     }
 });

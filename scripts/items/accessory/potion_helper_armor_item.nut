@@ -7,7 +7,7 @@ this.potion_helper_armor_item <- this.inherit("scripts/items/item", {
         this.m.Description = "Repairs the most damaged equipped helmet or body armor outside battle.";
         this.m.ItemType = this.Const.Items.ItemType.Usable;
         this.m.IsUsable = true;
-        this.m.Icon = "consumables/potion_02.png";
+        this.m.Icon = "consumables/potion_helper_armor.png";
         this.m.Value = ::PotionHelper.getPrice("ArmorRepairPrice");
     }
 

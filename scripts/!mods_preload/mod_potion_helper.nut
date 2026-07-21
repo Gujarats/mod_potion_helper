@@ -34,6 +34,7 @@
 	p.addRangeSetting("LowHealthPct", 30, 1, 100, 1, "Low Health Restored (%)", "Percentage of maximum hitpoints restored in battle.");
 	p.addRangeSetting("MediumHealthPct", 65, 1, 100, 1, "Medium Health Restored (%)", "Percentage of maximum hitpoints restored in battle.");
 	p.addRangeSetting("HighHealthPct", 100, 1, 100, 1, "High Health Restored (%)", "Percentage of maximum hitpoints restored in battle.");
+	p.addRangeSetting("PotionDrinkAPCost", 3, 0, 20, 1, "Potion Drink AP Cost", "Action points consumed when drinking a health potion in battle.");
 	p.addRangeSetting("LowHealthPrice", 35, 0, 1000, 1, "Low Base Price", "Crowns before market modifiers.");
 	p.addRangeSetting("MediumHealthPrice", 65, 0, 1000, 1, "Medium Base Price", "Crowns before market modifiers.");
 	p.addRangeSetting("HighHealthPrice", 90, 0, 1000, 1, "High Base Price", "Crowns before market modifiers.");

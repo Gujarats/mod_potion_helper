@@ -10,8 +10,9 @@ this.potion_helper_drink_skill <- this.inherit("scripts/skills/skill", {
         this.m.Description = "Drink this potion to restore health.";
         this.m.Type = this.Const.SkillType.Active;
         this.m.IsActive = true;
+        this.m.IsStacking = true;
         this.m.IsTargeted = true;
-        this.m.ActionPointCost = 3;
+        this.m.ActionPointCost = ::PotionHelper.conf("PotionDrinkAPCost");
         this.m.FatigueCost = 5;
         this.m.MinRange = 0;
         this.m.MaxRange = 0;

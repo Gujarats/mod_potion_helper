@@ -10,6 +10,8 @@ this.potion_helper_health_item <- this.inherit("scripts/items/accessory/accessor
         this.m.IsAllowedInBag = true;
         this.m.IsDroppedAsLoot = true;
         this.m.ShowOnCharacter = false;
+        this.m.ItemType = this.Const.Items.ItemType.Usable;
+        this.m.IsUsable = true;
         this.m.Icon = "consumables/potion_01.png";
         this.m.Value = 35;
     }

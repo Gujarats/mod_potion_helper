@@ -15,11 +15,19 @@ this.potion_helper_drink_skill <- this.inherit("scripts/skills/skill", {
         this.m.FatigueCost = 5;
         this.m.MinRange = 0;
         this.m.MaxRange = 0;
+        this.m.SoundOnUse = [
+            "sounds/combat/drink_01.wav",
+            "sounds/combat/drink_02.wav",
+            "sounds/combat/drink_03.wav"
+        ];
     }
 
     function setTier( _tier )
     {
         this.m.Tier = _tier;
+        this.m.Icon = "skills/potion_helper_health_" + this.m.Tier + ".png";
+        this.m.IconDisabled = this.m.Icon;
+        this.m.Overlay = "potion_helper_health_" + this.m.Tier;
     }
 
     function onUse( _user, _targetTile )

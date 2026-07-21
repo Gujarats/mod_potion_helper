@@ -45,6 +45,16 @@ this.potion_helper_health_item <- this.inherit("scripts/items/accessory/accessor
         this.addSkill(skill);
     }
 
+    function onUnequip()
+    {
+        if (this.m.Skill != null && !this.m.Skill.isNull() && this.getContainer() != null && this.getContainer().getActor() != null)
+        {
+            this.getContainer().getActor().getSkills().remove(this.m.Skill);
+        }
+
+        this.accessory.onUnequip();
+    }
+
     function onPutIntoBag()
     {
         this.onEquip();

@@ -36,7 +36,10 @@ this.potion_helper_drink_skill <- this.inherit("scripts/skills/skill", {
     function onUse( _user, _targetTile )
     {
         ::PotionHelper.restoreHealth(_user, this.m.Tier);
-        this.m.Item.get().removeSelf();
+        if (this.m.Item != null && !this.m.Item.isNull())
+        {
+            this.m.Item.removeSelf();
+        }
         return true;
     }
 });

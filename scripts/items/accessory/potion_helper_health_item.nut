@@ -37,6 +37,11 @@ this.potion_helper_health_item <- this.inherit("scripts/items/accessory/accessor
             return false;
         }
 
+        if (_actor.getHitpoints() >= _actor.getHitpointsMax())
+        {
+            return false;
+        }
+
         ::PotionHelper.restoreHealth(_actor, this.m.Tier);
         if (this.m.Tier == "high" && this.Math.rand(1, 100) <= ::PotionHelper.conf("HighInjuryCureChance"))
         {

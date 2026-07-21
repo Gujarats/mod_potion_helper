@@ -17,6 +17,7 @@ $healthItem = Get-Content -LiteralPath (Join-Path $root 'scripts/items/accessory
 if ($healthItem.Count -lt 20) { throw 'Health potion item must remain formatted as a multi-line Squirrel class.' }
 Require-Token 'scripts/items/accessory/potion_helper_health_item.nut' 'this.m.ItemType = this.Const.Items.ItemType.Usable;'
 Require-Token 'scripts/items/accessory/potion_helper_health_item.nut' 'this.m.IsUsable = true;'
+Require-Token 'scripts/items/accessory/potion_helper_health_item.nut' 'if (_actor.getHitpoints() >= _actor.getHitpointsMax())'
 Require-Token 'scripts/skills/actives/potion_helper_drink_skill.nut' '"skills/potion_helper_health_" + this.m.Tier + ".png"'
 Require-Token 'scripts/skills/actives/potion_helper_drink_skill.nut' '"sounds/combat/drink_01.wav"'
 

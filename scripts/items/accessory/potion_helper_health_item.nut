@@ -10,31 +10,21 @@ this.potion_helper_health_item <- this.inherit("scripts/items/accessory/accessor
         this.m.IsAllowedInBag = true;
         this.m.IsDroppedAsLoot = true;
         this.m.ShowOnCharacter = false;
-        this.m.ItemType = this.Const.Items.ItemType.Usable;
         this.m.IsUsable = true;
         this.m.Icon = "consumables/potion_01.png";
         this.m.Value = 35;
     }
 
-    function isUsable()
-    {
-        if (!this.item.isUsable())
-        {
-            return false;
-        }
+    function getTooltip()
+	{
+		local result = this.accessory.getTooltip();
+		return result;
+	}
 
-        local container = this.getContainer();
-        if (container != null && container.getActor() != null && !container.getActor().isNull())
-        {
-            local actor = container.getActor();
-            if (actor.getHitpoints() >= actor.getHitpointsMax())
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
+    function playInventorySound( _eventType )
+	{
+		this.Sound.play("sounds/cloth_01.wav", this.Const.Sound.Volume.Inventory);
+	}
 
     function onEquip()
     {

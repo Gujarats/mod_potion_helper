@@ -9,6 +9,7 @@ this.potion_helper_drink_skill <- this.inherit("scripts/skills/skill", {
         this.m.Name = "Drink Health Potion";
         this.m.Description = "Drink this potion to restore health.";
         this.m.Type = this.Const.SkillType.Active;
+        this.m.Order = this.Const.SkillOrder.Any - 10; // Puts it neatly with other active items
         this.m.IsActive = true;
         this.m.IsStacking = true;
         this.m.IsTargeted = true;

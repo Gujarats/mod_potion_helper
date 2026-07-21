@@ -13,4 +13,6 @@ Require-Token 'scripts/!mods_preload/mod_potion_helper.nut' 'LowHealthPct'
 Require-Token 'scripts/!mods_preload/mod_potion_helper.nut' 'ArmorRepairMinPct'
 Require-Token 'scripts/mods/potion_helper_service.nut' 'PotionHelper'
 Require-Token 'scripts/mods/potion_helper_market.nut' 'marketplace_building'
+$healthItem = Get-Content -LiteralPath (Join-Path $root 'scripts/items/accessory/potion_helper_health_item.nut')
+if ($healthItem.Count -lt 20) { throw 'Health potion item must remain formatted as a multi-line Squirrel class.' }
 Write-Host 'Potion Helper layout validation passed.'

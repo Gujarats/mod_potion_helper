@@ -1,4 +1,48 @@
-::PotionHelper.addStock <- function(_building, _stash, _script, _count) { for(local i=0;i<_count;++i) { local item=::new("scripts/items/" + _script); item.setPriceMult(_building.getPriceMult()); _stash.add(item); } };
-::PotionHelper.addMarketStock <- function(_building, _stash, _alchemist) { local settlement=_building.getSettlement(); ::PotionHelper.addStock(_building,_stash,"accessory/potion_helper_low_item",::PotionHelper.conf("LowHealthStock")); if (!_alchemist && ::PotionHelper.conf("RestrictMediumToAlchemists")) {} else ::PotionHelper.addStock(_building,_stash,"accessory/potion_helper_medium_item",::PotionHelper.conf("MediumHealthStock")); local highAllowed=(!::PotionHelper.conf("RestrictHighToAlchemists") || _alchemist) && (!::PotionHelper.conf("RestrictHighToLargeSettlements") || (settlement != null && settlement.getSize() >= 3)); if(highAllowed) ::PotionHelper.addStock(_building,_stash,"accessory/potion_helper_high_item",::PotionHelper.conf("HighHealthStock")); ::PotionHelper.addStock(_building,_stash,"accessory/potion_helper_armor_item",::PotionHelper.conf("ArmorRepairStock")); _stash.sort(); };
-::PotionHelper.HooksMod.hook("scripts/entity/world/settlements/buildings/marketplace_building", function(q) { q.onAfterFillStash=@(__original) function(_stash) { __original(_stash); ::PotionHelper.addMarketStock(this,_stash,false); }; });
-::PotionHelper.HooksMod.hook("scripts/entity/world/settlements/buildings/alchemist_building", function(q) { q.onAfterFillStash=@(__original) function(_stash) { __original(_stash); ::PotionHelper.addMarketStock(this,_stash,true); }; });
+::PotionHelper.addStock <- function( _building, _stash, _script, _count )
+{
+    for (local i = 0; i < _count; ++i)
+    {
+        local item = ::new("scripts/items/" + _script);
+        item.setPriceMult(_building.getPriceMult());
+        _stash.add(item);
+    }
+};
+
+::PotionHelper.addMarketStock <- function( _building, _stash, _isAlchemist )
+{
+    local settlement = _building.getSettlement();
+    ::PotionHelper.addStock(_building, _stash, "accessory/potion_helper_low_item", ::PotionHelper.conf("LowHealthStock"));
+
+    if (_isAlchemist || !::PotionHelper.conf("RestrictMediumToAlchemists"))
+    {
+        ::PotionHelper.addStock(_building, _stash, "accessory/potion_helper_medium_item", ::PotionHelper.conf("MediumHealthStock"));
+    }
+
+    local highAllowed = (!_isAlchemist ? !::PotionHelper.conf("RestrictHighToAlchemists") : true)
+        && (!::PotionHelper.conf("RestrictHighToLargeSettlements") || (settlement != null && settlement.getSize() >= 3));
+    if (highAllowed)
+    {
+        ::PotionHelper.addStock(_building, _stash, "accessory/potion_helper_high_item", ::PotionHelper.conf("HighHealthStock"));
+    }
+
+    ::PotionHelper.addStock(_building, _stash, "accessory/potion_helper_armor_item", ::PotionHelper.conf("ArmorRepairStock"));
+    _stash.sort();
+};
+
+::PotionHelper.HooksMod.hook("scripts/entity/world/settlements/buildings/marketplace_building", function( q )
+{
+    q.onAfterFillStash = @(__original) function( _stash )
+    {
+        __original(_stash);
+        ::PotionHelper.addMarketStock(this, _stash, false);
+    };
+});
+
+::PotionHelper.HooksMod.hook("scripts/entity/world/settlements/buildings/alchemist_building", function( q )
+{
+    q.onAfterFillStash = @(__original) function( _stash )
+    {
+        __original(_stash);
+        ::PotionHelper.addMarketStock(this, _stash, true);
+    };
+});

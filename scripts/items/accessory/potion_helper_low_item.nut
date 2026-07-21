@@ -1,1 +1,11 @@
-this.potion_helper_low_item <- this.inherit("scripts/items/accessory/potion_helper_health_item", { function create() { this.potion_helper_health_item.create(); this.m.ID="accessory.potion_helper_low"; this.m.Name="Low Health Potion"; this.m.Description="A small emergency draught."; this.m.Tier="low"; this.m.Value=::PotionHelper.getPrice("LowHealthPrice"); } });
+this.potion_helper_low_item <- this.inherit("scripts/items/accessory/potion_helper_health_item", {
+    function create()
+    {
+        this.potion_helper_health_item.create();
+        this.m.ID = "accessory.potion_helper_low";
+        this.m.Name = "Low Health Potion";
+        this.m.Description = "A small emergency draught.";
+        this.m.Tier = "low";
+        this.m.Value = ::PotionHelper.getPrice("LowHealthPrice");
+    }
+});

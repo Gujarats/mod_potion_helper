@@ -3,7 +3,9 @@ Add-Type -AssemblyName System.Drawing
 $root = Split-Path -Parent $PSScriptRoot
 $source = Join-Path (Split-Path -Parent $root) 'data_001\gfx\ui\items\consumables\potion_02.png'
 $destination = Join-Path $root 'gfx\ui\items\consumables'
+$skillDestination = Join-Path $root 'gfx\ui\skills'
 New-Item -ItemType Directory -Force -Path $destination | Out-Null
+New-Item -ItemType Directory -Force -Path $skillDestination | Out-Null
 
 $colors = @{
     'potion_helper_health_high.png' = [System.Drawing.Color]::FromArgb(220, 40, 35)
@@ -27,5 +29,8 @@ foreach ($entry in $colors.GetEnumerator()) {
             }
         }
         $output.Save((Join-Path $destination $entry.Key), [System.Drawing.Imaging.ImageFormat]::Png)
+        if ($entry.Key -like 'potion_helper_health_*') {
+            $output.Save((Join-Path $skillDestination $entry.Key), [System.Drawing.Imaging.ImageFormat]::Png)
+        }
     } finally { $input.Dispose(); $output.Dispose() }
 }

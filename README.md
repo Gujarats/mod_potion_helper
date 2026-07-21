@@ -17,3 +17,16 @@ Adds health potions for quick-slot tactical use and an out-of-battle armor repai
 ## Compatibility
 
 Legends is intentionally unsupported; Potion Helper logs and disables its hooks when Legends is detected. Potion of Resurrection is not required.
+
+## Known Issue
+ **bugs show again** : 
+-  the active skill can only be exist 1 potion at a time, cannot have 2 same potion or 2 different potion
+- some weird active skill still active after usage, but gone after pressing `esc`
+
+**Fixes** :
+- on combat when using the active skill the item now consumed and gone
+- the active skill also gone (expected)
+
+**Workaround** : 
+ - to use 2 potions, use the first skill showing in the UI menu battle
+ - after than go to the menu character pressing (C) or (I) then move the potion to different slot quick bag

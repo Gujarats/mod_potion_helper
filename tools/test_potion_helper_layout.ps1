@@ -19,11 +19,14 @@ Require-Token 'scripts/items/accessory/potion_helper_health_item.nut' 'this.m.It
 Require-Token 'scripts/items/accessory/potion_helper_health_item.nut' 'this.m.IsUsable = true;'
 Require-Token 'scripts/items/accessory/potion_helper_health_item.nut' 'if (_actor.getHitpoints() >= _actor.getHitpointsMax())'
 Require-Token 'scripts/skills/actives/potion_helper_drink_skill.nut' '"skills/potion_helper_health_" + this.m.Tier + ".png"'
+Require-Token 'scripts/skills/actives/potion_helper_drink_skill.nut' '"skills/potion_helper_health_" + this.m.Tier + "_sw.png"'
 Require-Token 'scripts/skills/actives/potion_helper_drink_skill.nut' '"sounds/combat/drink_01.wav"'
 
 foreach ($tier in @('low', 'medium', 'high')) {
-    $skillIcon = Join-Path $root "gfx/ui/skills/potion_helper_health_$tier.png"
-    if (-not (Test-Path -LiteralPath $skillIcon -PathType Leaf)) { throw "Missing skill icon $skillIcon" }
+    foreach ($suffix in @('', '_sw')) {
+        $skillIcon = Join-Path $root "gfx/skills/potion_helper_health_$tier$suffix.png"
+        if (-not (Test-Path -LiteralPath $skillIcon -PathType Leaf)) { throw "Missing skill icon $skillIcon" }
+    }
 }
 
 Write-Host 'Potion Helper layout validation passed.'

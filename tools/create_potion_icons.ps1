@@ -3,7 +3,7 @@ Add-Type -AssemblyName System.Drawing
 $root = Split-Path -Parent $PSScriptRoot
 $source = Join-Path (Split-Path -Parent $root) 'data_001\gfx\ui\items\consumables\potion_02.png'
 $destination = Join-Path $root 'gfx\ui\items\consumables'
-$skillDestination = Join-Path $root 'gfx\ui\skills'
+$skillDestination = Join-Path $root 'gfx\skills'
 New-Item -ItemType Directory -Force -Path $destination | Out-Null
 New-Item -ItemType Directory -Force -Path $skillDestination | Out-Null
 
@@ -31,6 +31,18 @@ foreach ($entry in $colors.GetEnumerator()) {
         $output.Save((Join-Path $destination $entry.Key), [System.Drawing.Imaging.ImageFormat]::Png)
         if ($entry.Key -like 'potion_helper_health_*') {
             $output.Save((Join-Path $skillDestination $entry.Key), [System.Drawing.Imaging.ImageFormat]::Png)
+            $disabled = [System.Drawing.Bitmap]::new($output.Width, $output.Height)
+            try {
+                for ($x = 0; $x -lt $output.Width; $x++) {
+                    for ($y = 0; $y -lt $output.Height; $y++) {
+                        $pixel = $output.GetPixel($x, $y)
+                        $luminance = [int](0.299 * $pixel.R + 0.587 * $pixel.G + 0.114 * $pixel.B)
+                        $disabled.SetPixel($x, $y, [System.Drawing.Color]::FromArgb($pixel.A, $luminance, $luminance, $luminance))
+                    }
+                }
+                $disabledName = [System.IO.Path]::GetFileNameWithoutExtension($entry.Key) + '_sw.png'
+                $disabled.Save((Join-Path $skillDestination $disabledName), [System.Drawing.Imaging.ImageFormat]::Png)
+            } finally { $disabled.Dispose() }
         }
     } finally { $input.Dispose(); $output.Dispose() }
 }

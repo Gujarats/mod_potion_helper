@@ -20,13 +20,15 @@ this.potion_helper_drink_skill <- this.inherit("scripts/skills/skill", {
             "sounds/combat/drink_02.wav",
             "sounds/combat/drink_03.wav"
         ];
+
+
     }
 
     function setTier( _tier )
     {
         this.m.Tier = _tier;
         this.m.Icon = "skills/potion_helper_health_" + this.m.Tier + ".png";
-        this.m.IconDisabled = this.m.Icon;
+        this.m.IconDisabled = "skills/potion_helper_health_" + this.m.Tier + "_sw.png";
         this.m.Overlay = "potion_helper_health_" + this.m.Tier;
     }
 

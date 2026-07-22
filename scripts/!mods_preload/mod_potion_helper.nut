@@ -1,6 +1,6 @@
 ::PotionHelper <- {
 	ID = "mod_potion_helper",
-	Version = "1.0.2",
+	Version = "1.0.3",
 	Name = "Potion Helper",
 	Tiers = {
 		low = {

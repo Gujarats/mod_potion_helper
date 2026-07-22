@@ -74,13 +74,54 @@ this.potion_helper_drink_skill <- this.inherit("scripts/skills/skill", {
 		return true;
 	}
 
+    function onVerifyTarget( _originTile, _targetTile )
+	{
+		if (!this.skill.onVerifyTarget(_originTile, _targetTile))
+		{
+			return false;
+		}
+
+		local target = _targetTile.getEntity();
+
+		if (!this.m.Container.getActor().isAlliedWith(target))
+		{
+			return false;
+		}
+
+		return true;
+	}
+
     function onUse( _user, _targetTile )
     {
-        ::PotionHelper.restoreHealth(_user, this.m.Tier);
+        local target = _targetTile != null ? _targetTile.getEntity() : _user;
 
+        if (target == null || !target.isAlliedWith(_user) || !target.isAlive())
+        {
+            return false;
+        }
+
+        ::PotionHelper.restoreHealth(target, this.m.Tier);
+
+        local item = null;
         if (this.m.Item != null && !this.m.Item.isNull())
         {
-            this.m.Item.removeSelf();
+            item = this.m.Item.get();
+        }
+
+        if (item != null)
+        {
+            local container = item.getContainer();
+            if (container != null && !container.isNull() && container.removeFromBag != null)
+            {
+                if (!container.removeFromBag(item))
+                {
+                    item.removeSelf();
+                }
+            }
+            else
+            {
+                item.removeSelf();
+            }
         }
 
         return true;

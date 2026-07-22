@@ -83,11 +83,6 @@ this.potion_helper_drink_skill <- this.inherit("scripts/skills/skill", {
             this.m.Item.removeSelf();
         }
 
-        if (this.getContainer() != null)
-        {
-            this.getContainer().remove(this);
-        }
-
         return true;
     }
 });

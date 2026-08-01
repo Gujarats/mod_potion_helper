@@ -1,4 +1,6 @@
 this.potion_helper_armor_item <- this.inherit("scripts/items/item", {
+    m = {},
+
     function create()
     {
         this.item.create();

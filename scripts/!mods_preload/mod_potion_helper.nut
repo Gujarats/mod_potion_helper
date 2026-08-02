@@ -42,7 +42,7 @@
 		return::PotionHelper.Mod.ModSettings.getSetting(_key).getValue();
 	};
 	local p = ::PotionHelper.Mod.ModSettings.addPage("General");
-	local debugLogging = p.addBooleanSetting("DebugLogging", true, "Debug Logging", "Write Potion Helper debug lines to log.html.");
+	local debugLogging = p.addBooleanSetting("DebugLogging", false, "Debug Logging", "Write Potion Helper debug lines to log.html.");
 	debugLogging.addCallback(function( _data = null )
 	{
 		::PotionHelper.configureDebugLogging();

@@ -29,20 +29,23 @@
     _stash.sort();
 };
 
-::PotionHelper.HooksMod.hook("scripts/entity/world/settlements/buildings/marketplace_building", function( q )
+::PotionHelper.registerVanillaMarketHooks <- function()
 {
-    q.onAfterFillStash = @(__original) function( _stash )
+    ::PotionHelper.HooksMod.hook("scripts/entity/world/settlements/buildings/marketplace_building", function( q )
     {
-        __original(_stash);
-        ::PotionHelper.addMarketStock(this, _stash, false);
-    };
-});
+        q.onAfterFillStash = @(__original) function( _stash )
+        {
+            __original(_stash);
+            ::PotionHelper.addMarketStock(this, _stash, false);
+        };
+    });
 
-::PotionHelper.HooksMod.hook("scripts/entity/world/settlements/buildings/alchemist_building", function( q )
-{
-    q.onAfterFillStash = @(__original) function( _stash )
+    ::PotionHelper.HooksMod.hook("scripts/entity/world/settlements/buildings/alchemist_building", function( q )
     {
-        __original(_stash);
-        ::PotionHelper.addMarketStock(this, _stash, true);
-    };
-});
+        q.onAfterFillStash = @(__original) function( _stash )
+        {
+            __original(_stash);
+            ::PotionHelper.addMarketStock(this, _stash, true);
+        };
+    });
+};

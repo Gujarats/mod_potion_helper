@@ -16,7 +16,11 @@ Adds health potions for quick-slot tactical use and an out-of-battle armor repai
 
 ## Compatibility
 
-Legends is intentionally unsupported; Potion Helper logs and disables its hooks when Legends is detected. Potion of Resurrection is not required.
+Legends is supported. Potion Helper adds its stock after Legends finishes filling marketplace and alchemist stashes. Potion of Resurrection is not required.
+
+## Debug Logging
+
+`Debug Logging` is available on the MSU General page and defaults to enabled. Potion Helper diagnostic output is written to `C:\Users\gujar\Documents\Battle Brothers\log.html`.
 
 ## Known Issue
  **bugs show again** : 

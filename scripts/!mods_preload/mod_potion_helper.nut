@@ -29,21 +29,22 @@
 	::PotionHelper.Mod <- ::MSU.Class.Mod(::PotionHelper.ID, ::PotionHelper.Version, ::PotionHelper.Name);
 	::PotionHelper.configureDebugLogging <- function()
 	{
-		local enabled = ::PotionHelper.Mod.ModSettings.getSetting("DebugLogging").getValue();
-		::PotionHelper.Mod.Debug.setFlag("default", enabled);
-
-		if (enabled)
+		if ("GuzBluezDebugLogController" in getroottable()
+			&& "registerTarget" in ::GuzBluezDebugLogController)
 		{
-			::PotionHelper.Mod.Debug.printLog("[PotionHelper] debug logging enabled");
+			::GuzBluezDebugLogController.registerTarget(::PotionHelper.ID, ::PotionHelper.Mod);
+			return;
 		}
+
+		::PotionHelper.Mod.Debug.setFlag("default", ::PotionHelper.Mod.ModSettings.getSetting("DebugLogging").getValue());
 	};
 
     ::PotionHelper.conf <- function(_key) {
 		return::PotionHelper.Mod.ModSettings.getSetting(_key).getValue();
 	};
 	local p = ::PotionHelper.Mod.ModSettings.addPage("General");
-	local debugLogging = p.addBooleanSetting("DebugLogging", false, "Debug Logging", "Write Potion Helper debug lines to log.html.");
-	debugLogging.addCallback(function( _data = null )
+	local debugLogging = p.addBooleanSetting("DebugLogging", true, "Debug Logging", "Write Potion Helper debug lines to log.html.");
+	debugLogging.addCallback(function( _ )
 	{
 		::PotionHelper.configureDebugLogging();
 	});

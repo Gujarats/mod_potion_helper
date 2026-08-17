@@ -20,7 +20,7 @@ Legends is supported. Potion Helper adds its stock after Legends finishes fillin
 
 ## Debug Logging
 
-`Debug Logging` is available on the MSU General page and defaults to enabled. Potion Helper diagnostic output is written to `C:\Users\gujar\Documents\Battle Brothers\log.html`.
+`Debug Logging` is available on the MSU General page and defaults to enabled. Global Developer Test overrides this value while installed. Potion Helper diagnostic output is written to `C:\Users\gujar\Documents\Battle Brothers\log.html`.
 
 ## Known Issue
  **bugs show again** : 
